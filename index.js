@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const appSettings = {
     databaseURL: "https://playround-1e465-default-rtdb.asia-southeast1.firebasedatabase.app"
@@ -18,9 +18,44 @@ addButonEl.addEventListener("click", function() {
 
     push(shoppingListInDB, inputValue);
 
-    inputFieldEl.value = "";
-
-    shoppingListEl.innerHTML += `<li>${inputValue}</li>`
-
+    clearInputFieldEl()
 
 });
+
+onValue(shoppingListInDB, function(snapshot){
+    let itemsArray = Object.entries(snapshot.val())
+
+    clearShoppingEl()
+
+    for (let i=0; i <itemsArray.length; i++){
+        let currentItem = itemsArray[i];
+
+        let currentItemID = currentItem[0];
+        let currentItemValue = currentItem[1];
+
+
+        appendItemToShoppingListEl(currentItem)
+    }
+
+})
+
+function clearShoppingEl(){
+    shoppingListEl.innerHTML = "";
+
+}
+
+function clearInputFieldEl() {
+    inputFieldEl.value = "";
+}
+
+function  appendItemToShoppingListEl(item) {
+    let itemID = item[0];
+    let itemValue = item[1];
+
+   let newEl = document.createElement("li");
+
+   newEl.textContent = itemValue;
+
+   shoppingListEl.append(newEl)
+
+}
