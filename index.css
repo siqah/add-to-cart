@@ -2,6 +2,9 @@ html, body{
     margin: 0;
     padding: 0;
     font-family: 'Roboto',  sans-serif;
+    background-color: #EEF0F4;
+    color: #432000;
+    user-select: none;
 }
 .container{
     display: flex;
@@ -12,6 +15,7 @@ html, body{
 img {
    width:150px;
    margin: 0 auto;
+   border-radius: 100px;
 }
 
 input {
@@ -37,6 +41,11 @@ button {
     font-family: sans-serif;
 }
 
+button:hover {
+    background-color: #432000;
+    cursor: pointer;
+}
+
 ul{
     list-style-type: none;
     padding:0%;
@@ -54,4 +63,9 @@ ul li {
     border-radius: 8px;
     flex-grow: 1;
     text-align: center;
+}
+
+ul li:hover {
+    background-color: #FFECC7;
+    cursor: pointer;
 }
